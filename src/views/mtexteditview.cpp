@@ -1168,7 +1168,8 @@ void MTextEditViewPrivate::playSelectionAndMagnifierFeedback()
     } else if (moveAmount < moveLimit && timeOnFeedback.isValid()
         && timeOnFeedback.elapsed() > q->style()->minimumFeedbackInterval()
         && (!holdFeedback || (timeOnFeedback.elapsed() > HoldFeedbackTime))) {
-        if (magnifier && !controller->hasSelectedText()) {
+
+        if (magnifier && !selectionHandleIsPressed) {
             // Cursor moved while text magnifier is up
             q->style()->magnifierCursorMoveFeedback().play();
             timeOnFeedback.start();
@@ -1177,6 +1178,7 @@ void MTextEditViewPrivate::playSelectionAndMagnifierFeedback()
             // Selection changed
             const int selectedAmount = qAbs(previousSelectionCursorPosition
                                             - controller->cursorPosition());
+
             bool playFeedback = false;
 
             // Don't play feedback for whitespace. If selected amount is greater
