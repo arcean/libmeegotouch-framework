@@ -25,7 +25,7 @@
 
 #include <QGraphicsView>
 
-#define OLOCK
+//#define OLOCK
 
 class MWindowPrivate;
 class MWidget;
